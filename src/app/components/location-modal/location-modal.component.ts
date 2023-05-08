@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, ToastController } from '@ionic/angular';
 
 // Service
 import { LocationService } from 'src/app/services/location.service';
 
 // Interfaces
 import { City, LocObj, Locations } from 'src/app/interfaces/locations.interface';
-import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-location-modal',
@@ -17,7 +17,8 @@ export class LocationModalComponent implements OnInit {
 
   constructor(
     private locationService: LocationService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -36,6 +37,7 @@ export class LocationModalComponent implements OnInit {
   selectCity(city: City) {
     if (!this.locationService.selectedCity(city)) {
       this.locationService.addNewCity(city);
+      this.presentToast(city)
     } else {
       this.locationService.removeCity(city);
     }
@@ -48,5 +50,15 @@ export class LocationModalComponent implements OnInit {
       return exists
     }
     return Nexists
+  }
+
+  async presentToast(city: City) {
+    const toast = await this.toastCtrl.create({
+      message: `${city.name} added successfully!`,
+      duration: 1500,
+      position: 'bottom',
+    });
+
+    await toast.present();
   }
 }

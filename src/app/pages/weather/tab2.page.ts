@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(private locationService: LocationService) {}
+
+  get listOfLocations() {
+    return this.locationService.getSelectedCities
+  }
 
 }
