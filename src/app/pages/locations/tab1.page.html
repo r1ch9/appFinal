@@ -1,0 +1,22 @@
+<ion-content [fullscreen]="true">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="openModal()" expand="block" fill="outline">
+          Add new locations
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size-sm="6" size-xs="12" *ngFor="let city of selectedCities">
+        <ion-item>
+          <ion-label>{{city.name}}</ion-label>
+          <ion-icon slot="end" name="close-circle-outline"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
