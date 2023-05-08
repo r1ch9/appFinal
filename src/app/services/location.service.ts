@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { City, Locations } from '../interfaces/locations.interface';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class LocationService {
   constructor(private http: HttpClient) { }
   private selectedCities: City[] = [];
 
-  getListOfLocations() {
+  getAllLocations() {
     return this.http.get<Locations>(`/assets/data/data.json`);
   }
 
@@ -25,11 +26,7 @@ export class LocationService {
     const result = this.selectedCities.filter(cities => cities.name !== city.name);
     this.selectedCities = result;
   }
-
-  getSelectedCities() {
-    return [...this.selectedCities]
-  }
-
+  
   selectedCity(city: City): boolean {
     const existe = this.selectedCities.filter(item => item.name === city.name)
     if (existe.length === 1) {
@@ -37,5 +34,10 @@ export class LocationService {
     }
     return false;
   }
+
+  get getSelectedCities() {
+    return [...this.selectedCities]
+  }
+
 
 }

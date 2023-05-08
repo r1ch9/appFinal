@@ -9,3 +9,8 @@ export interface City {
     country: string;
     state:   string;
 }
+
+export interface LocObj{
+    text: string,
+    color: string
+}

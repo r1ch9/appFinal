@@ -15,8 +15,7 @@ import { LocationService } from 'src/app/services/location.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
-export class Tab1Page {
-  public selectedCities: City[] = [];
+export class Tab1Page  {
 
   async openModal() {
     const modal = await this.modalCtrl.create({
@@ -26,8 +25,17 @@ export class Tab1Page {
     modal.present();
   }
 
+  get selectedCities() {
+    return this.locationService.getSelectedCities
+  }
+
+  removeClick(city: City) {
+    this.locationService.removeCity(city)
+  }
+
   constructor(
     private modalCtrl: ModalController,
     private locationService: LocationService
-  ) {}
+  ) {
+  }
 }

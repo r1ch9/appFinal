@@ -11,7 +11,7 @@
   <ion-list lines="full" mode="ios">
     <ion-item *ngFor="let city of locationsList" mode="ios" (click)="selectCity(city)">
       <ion-label>{{city.name}}, {{city.state}}</ion-label>
-      <ion-note>{{verifyIfSelected(city)}}</ion-note>
+      <ion-note color="{{verifyIfSelected(city).color}}">{{verifyIfSelected(city).text}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>

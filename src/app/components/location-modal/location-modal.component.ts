@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocationService } from 'src/app/services/location.service';
 
 // Interfaces
-import { City, Locations } from 'src/app/interfaces/locations.interface';
+import { City, LocObj, Locations } from 'src/app/interfaces/locations.interface';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -22,7 +22,7 @@ export class LocationModalComponent implements OnInit {
 
   ngOnInit() {
     this.locationService
-      .getListOfLocations()
+      .getAllLocations()
       .subscribe((locations: Locations) => {
         this.locationsList = locations.cityData;
       });
@@ -41,10 +41,12 @@ export class LocationModalComponent implements OnInit {
     }
   }
 
-  verifyIfSelected(city: City) {
+  verifyIfSelected(city: City): LocObj {
+    const exists: LocObj = {text: 'Add city', color: 'primary'};
+    const Nexists: LocObj = {text: 'Remove city', color: 'danger'};
     if (!this.locationService.selectedCity(city)) {
-      return 'Add city';
+      return exists
     }
-    return 'Remove city';
+    return Nexists
   }
 }
