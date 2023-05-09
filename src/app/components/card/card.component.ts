@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { City, weatherCity } from 'src/app/interfaces/locations.interface';
 import { WeatherService } from 'src/app/services/weather.service';
+import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'app-card',
@@ -11,7 +12,10 @@ export class CardComponent  implements OnInit {
   public cityWWeather!: weatherCity;
   @Input() city!: City;
 
-  constructor(private weatherService: WeatherService) { }
+  constructor(
+    private weatherService: WeatherService,
+    private locationService: LocationService
+    ) { }
 
   ngOnInit() {
     setTimeout(() => { 
@@ -73,5 +77,9 @@ export class CardComponent  implements OnInit {
         return 'sunny-outline'
         break;
     }
+  }
+
+  removeLocation(){
+    this.locationService.removeCity(this.city)
   }
 }

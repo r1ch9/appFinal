@@ -9,7 +9,7 @@
   <ion-card-content>
     <ion-item>
         <ion-icon slot="start" name="{{cityWWeather.currentWeather}}"></ion-icon>
-        <ion-icon slot="end" color="danger" name="close-circle-outline"></ion-icon>
+        <ion-icon slot="end" color="danger" name="close-circle-outline" (click)="removeLocation()"></ion-icon>
     </ion-item>
   </ion-card-content>
 </ion-card>
