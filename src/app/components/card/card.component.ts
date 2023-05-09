@@ -38,17 +38,7 @@ export class CardComponent  implements OnInit {
       .subscribe((resp: any) => {
         this.weatherObject = resp;
         temperature = resp.main.temp;
-        if (resp.weather[0].main === 'Drizzle') {
-          currentWeather = 'Rain';
-        } else if (
-          resp.weather[0].main === 'Mist' ||
-          resp.weather[0].main === 'Fog' ||
-          resp.weather[0].main === 'Smoke'
-        ) {
-          currentWeather = 'Haze';
-        } else {
-          currentWeather = resp.weather[0].main;
-        }
+        currentWeather = resp.weather[0].main;
     
         this.cityWWeather = {
           name: this.city.name,
