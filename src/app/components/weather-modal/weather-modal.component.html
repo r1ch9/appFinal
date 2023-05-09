@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" mode="ios">
+      <ion-back-button defaultHref="/tabs/weather" (click)="closeModal()"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">Weather Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <img src="{{iconImg.image}}" alt="" style="width: 100%; height: 150px;">
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-card-title>{{weatherInfo.name}}</ion-card-title>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-list>
+              <ion-label>Temperature: </ion-label>
+
+              <ion-item>
+                <ion-icon name="thermometer-outline"></ion-icon>
+                <span> Temp: {{weatherInfo.main.temp}}</span>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="arrow-down-circle-outline"></ion-icon>
+                <span> Min: {{weatherInfo.main.temp_min}}</span>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                <span> Max: {{weatherInfo.main.temp_max}}</span>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-list>
+              <ion-label>Details: </ion-label>
+
+              <ion-item>
+                <ion-icon name="water-outline"></ion-icon>
+                <span> Humidity: {{weatherInfo.main.humidity}} %</span>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="information-outline"></ion-icon>
+                <span style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"> {{weatherInfo.weather[0].description}}</span>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="contract-outline"></ion-icon>
+                <span> {{weatherInfo.main.pressure}} hPa</span>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

@@ -1,7 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { City, IconImg, weatherCity } from 'src/app/interfaces/locations.interface';
+import { ModalController } from '@ionic/angular';
+
+// Interfaces
+import { City, CityWeather, IconImg, weatherCity } from 'src/app/interfaces/locations.interface';
+
+// Services
 import { WeatherService } from 'src/app/services/weather.service';
 import { LocationService } from '../../services/location.service';
+
+//Components
+import { WeatherModalComponent } from '../weather-modal/weather-modal.component';
 
 @Component({
   selector: 'app-card',
@@ -10,11 +18,14 @@ import { LocationService } from '../../services/location.service';
 })
 export class CardComponent  implements OnInit {
   public cityWWeather!: weatherCity;
+  private weatherObject!: CityWeather;
+
   @Input() city!: City;
 
   constructor(
     private weatherService: WeatherService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private modalCtrl: ModalController
     ) { }
 
   ngOnInit() {
@@ -25,6 +36,7 @@ export class CardComponent  implements OnInit {
   
       this.weatherService.getWeather(this.city)
       .subscribe((resp: any) => {
+        this.weatherObject = resp;
         temperature = resp.main.temp;
         if (resp.weather[0].main === 'Drizzle') {
           currentWeather = 'Rain';
@@ -45,41 +57,24 @@ export class CardComponent  implements OnInit {
           country: this.city.country,
           state: this.city.state,
           temperature,
-          currentWeatherII: this.weatherIcon(currentWeather),
+          currentWeatherII: this.weatherService.weatherIcon(currentWeather),
         };
       });
-    }, 2000);
-  }
-
-  weatherIcon(currentWeather: string): IconImg {
-    switch (currentWeather) {
-      case 'Clear':
-        return {icon: 'sunny-outline', image: '/assets/sun.jpg'}
-        break;
-    
-      case 'Rain' || 'Drizzle':
-        return {icon: 'rainy-outline', image: '/assets/rain.jpg'}
-        break;
-
-      case 'Thunderstorm':
-        return {icon: 'thunderstorm-outline', image: '/assets/thunder.jpg'}
-        break;
-      
-      case 'Clouds':
-        return {icon: 'cloudy-outline', image: '/assets/cloud.jpg'}
-        break;
-      
-      case 'Haze':
-        return {icon: 'cloud-download-outline', image: '/assets/haze.jpg'}
-        break;
-
-      default:
-        return {icon: 'sunny-outline', image: '/assets/sun.jpg'}
-        break;
-    }
+    }, 1000);
   }
 
   removeLocation(){
     this.locationService.removeCity(this.city)
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: WeatherModalComponent,
+      componentProps: {
+        weatherInfo: this.weatherObject
+      }
+    });
+
+    modal.present();
   }
 }
