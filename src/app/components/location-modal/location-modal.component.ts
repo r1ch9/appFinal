@@ -55,7 +55,7 @@ export class LocationModalComponent implements OnInit {
   async presentToast(city: City) {
     const toast = await this.toastCtrl.create({
       message: `${city.name} added successfully!`,
-      duration: 1500,
+      duration: 1000,
       position: 'bottom',
     });
 
