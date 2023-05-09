@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { City, weatherCity } from 'src/app/interfaces/locations.interface';
+import { City, IconImg, weatherCity } from 'src/app/interfaces/locations.interface';
 import { WeatherService } from 'src/app/services/weather.service';
 import { LocationService } from '../../services/location.service';
 
@@ -21,7 +21,7 @@ export class CardComponent  implements OnInit {
     setTimeout(() => { 
 
       let temperature;
-      let currentWeather;
+      let currentWeather ;
   
       this.weatherService.getWeather(this.city)
       .subscribe((resp: any) => {
@@ -45,36 +45,36 @@ export class CardComponent  implements OnInit {
           country: this.city.country,
           state: this.city.state,
           temperature,
-          currentWeather: this.weatherIcon(currentWeather),
+          currentWeatherII: this.weatherIcon(currentWeather),
         };
       });
     }, 2000);
   }
 
-  weatherIcon(currentWeather: string) {
+  weatherIcon(currentWeather: string): IconImg {
     switch (currentWeather) {
       case 'Clear':
-        return 'sunny-outline'
+        return {icon: 'sunny-outline', image: '/assets/sun.jpg'}
         break;
     
       case 'Rain' || 'Drizzle':
-        return 'rainy-outline'
+        return {icon: 'rainy-outline', image: '/assets/rain.jpg'}
         break;
 
       case 'Thunderstorm':
-        return 'thunderstorm-outline'
+        return {icon: 'thunderstorm-outline', image: '/assets/thunder.jpg'}
         break;
       
       case 'Clouds':
-        return 'cloudy-outline'
+        return {icon: 'cloudy-outline', image: '/assets/cloud.jpg'}
         break;
       
       case 'Haze':
-        return 'cloud-download-outline'
+        return {icon: 'cloud-download-outline', image: '/assets/haze.jpg'}
         break;
 
       default:
-        return 'sunny-outline'
+        return {icon: 'sunny-outline', image: '/assets/sun.jpg'}
         break;
     }
   }

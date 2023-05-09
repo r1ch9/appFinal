@@ -1,6 +1,6 @@
 <!-- ionCard -->
 <ion-card *ngIf="cityWWeather && cityWWeather.temperature">
-  <ion-skeleton-text animated style="width: 100%; height: 150px;"></ion-skeleton-text>
+  <img src="{{cityWWeather.currentWeatherII.image}}" alt="" style="width: 100%; height: 150px;">
   <ion-card-header>
     <ion-label>{{cityWWeather.name}}</ion-label>
     <ion-label>{{cityWWeather.temperature}}</ion-label>
@@ -8,7 +8,7 @@
 
   <ion-card-content>
     <ion-item>
-        <ion-icon slot="start" name="{{cityWWeather.currentWeather}}"></ion-icon>
+        <ion-icon slot="start" name="{{cityWWeather.currentWeatherII.icon}}"></ion-icon>
         <ion-icon slot="end" color="danger" name="close-circle-outline" (click)="removeLocation()"></ion-icon>
     </ion-item>
   </ion-card-content>

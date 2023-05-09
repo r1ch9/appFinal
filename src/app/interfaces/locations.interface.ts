@@ -21,7 +21,7 @@ export interface weatherCity {
     country: string;
     state:   string;
     temperature: number;
-    currentWeather: string;
+    currentWeatherII: IconImg;
     name:    string;
 }
 
@@ -78,3 +78,8 @@ export interface Sys {
 export interface Clouds {
     all: number;
 }
+
+export interface IconImg {
+    icon: string,
+    image: string
+  }
