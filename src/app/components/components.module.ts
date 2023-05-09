@@ -4,6 +4,7 @@ import { LocationModalComponent } from './location-modal/location-modal.componen
 import { IonicModule } from '@ionic/angular';
 import { CardComponent } from './card/card.component';
 import { WeatherModalComponent } from './weather-modal/weather-modal.component';
+import { NoLocationsComponent } from './no-locations/no-locations.component';
 
 
 
@@ -12,6 +13,7 @@ import { WeatherModalComponent } from './weather-modal/weather-modal.component';
     LocationModalComponent,
     WeatherModalComponent,
     CardComponent,
+    NoLocationsComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { WeatherModalComponent } from './weather-modal/weather-modal.component';
   exports: [
     LocationModalComponent,
     WeatherModalComponent,
-    CardComponent
+    CardComponent,
+    NoLocationsComponent
   ]
 
 })

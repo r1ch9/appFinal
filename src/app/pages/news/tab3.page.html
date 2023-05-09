@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-segment [scrollable]="true" [value]="selectedTab" class="removeScroll">
       <ion-segment-button value="all">
-        All Cities
+        All
       </ion-segment-button>
       <ion-segment-button value="{{city.name}}" *ngFor="let city of listOfCities">
         {{city.name}}
@@ -13,12 +13,5 @@
 
 
 <ion-content [fullscreen]="true" class="ion-padding ion-align-items-center" *ngIf="listOfCities.length === 0">
-  <h3 class="no_locations loca_color">
-    THERE ARE NO LOCATIONS ADDED!
-  </h3>
-
-  <p class="no_locations">
-    Please add locations to request some news.
-  </p>
-
+  <app-no-locations></app-no-locations>
 </ion-content>
