@@ -14,6 +14,7 @@ import { City, LocObj, Locations } from 'src/app/interfaces/locations.interface'
 })
 export class LocationModalComponent implements OnInit {
   public locationsList: City[] = [];
+  public inputValue: string =  '';
 
   constructor(
     private locationService: LocationService,
@@ -57,10 +58,19 @@ export class LocationModalComponent implements OnInit {
       message: `${city.name} added successfully!`,
       duration: 500,
       position: 'bottom',
-
     });
 
 
     await toast.present();
+  }
+
+  inputChange(event: any) {
+    event.preventDefault()
+    this.inputValue = event.detail.value
+  }
+
+  get cityLists() {
+    const res = this.locationsList.filter(loc => loc.name.includes(this.inputValue));
+    return res
   }
 }
