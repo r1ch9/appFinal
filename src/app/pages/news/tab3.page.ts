@@ -2,27 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../../services/location.service';
 import { NewsService } from '../../services/news.service';
 import { Doc, NewsCity } from '../../interfaces/locations.interface';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page implements OnInit{
+export class Tab3Page {
   public selectedTab: string = 'all';
-  public newsList: NewsCity[] = []
+  public newsList: NewsCity[] = [];
+  public loading: any;
 
   constructor(
     private locationService: LocationService,
     private newsService: NewsService,
-  ) {}
-
-  ngOnInit(): void {
-  
+  ) {
   }
 
   get listOfCities() {
-    this.newsService.getListOfSelectedCities(this.locationService.getSelectedCities)
+    this.newsService.getListOfSelectedCities(this.locationService.getSelectedCities);
     return this.locationService.getSelectedCities
   }
 
@@ -51,10 +50,13 @@ export class Tab3Page implements OnInit{
     return arrToReturn
   }
 
+  /// Mover al service
   openNews(doc: Doc) {
     window.open(doc.web_url, '_blank');
   }
 
+
+  // Mover al service
   getDocPic(doc: Doc) {
     if(doc.multimedia[0] && doc.multimedia[0].url) {
       return `https://www.nytimes.com/${doc.multimedia[0].url}`

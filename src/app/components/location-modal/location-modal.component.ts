@@ -45,7 +45,7 @@ export class LocationModalComponent implements OnInit {
   }
 
   verifyIfSelected(city: City): LocObj {
-    const exists: LocObj = {text: 'Add city', color: 'primary'};
+    const exists: LocObj = {text: 'Add city', color: 'success'};
     const Nexists: LocObj = {text: 'Remove city', color: 'danger'};
     if (!this.locationService.selectedCity(city)) {
       return exists

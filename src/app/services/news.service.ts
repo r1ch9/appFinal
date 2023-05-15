@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { City, NewsCity, NewsResponse } from '../interfaces/locations.interface';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,12 @@ export class NewsService {
 
   constructor(
     private http: HttpClient,
+    private loadingCtrl: LoadingController
   ) { }
 
   private getNews(city: City) {
+    this.presentLoading();
+
     const params = new HttpParams()
       .set('api-key', this._newsApi)
       .set('sort', 'newest')
@@ -28,9 +32,21 @@ export class NewsService {
             city,
             data: cityResp.response
         }
+        setTimeout(() => {
+          this.loadingCtrl.dismiss()
+        })
         this.newsForCity.push(result);
       }
     )
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Requesting news...',
+      duration: 3000
+    });
+
+    return await loading.present();
   }
 
   getListOfSelectedCities(cities: City[]) {
