@@ -16,7 +16,7 @@
   <app-no-locations></app-no-locations>
 </ion-content>
 
-<ion-content [fullscreen]="true" *ngIf="listOfCities.length > 0 && newsForCity.length > 0">
+<ion-content [fullscreen]="true"  *ngIf="listOfCities.length > 0 && newsForCity.length > 0 && returnNewsByCity().length > 0">
   <ion-grid>
     <ion-row>
       <ion-col size-xs="12" size-md="4" size-lg="3" *ngFor="let doc of returnNewsByCity()">
@@ -35,4 +35,23 @@
       </ion-col>
     </ion-row>
   </ion-grid> 
+</ion-content>
+
+<ion-content *ngIf="listOfCities.length > 0 && returnNewsByCity().length === 0">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div>
+          <h3 class="no_locations loca_color">
+            SORRY!
+          </h3>
+          
+          <p class="no_locations">
+            There is a problem requesting news. <br>
+            Please try again later.
+          </p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
