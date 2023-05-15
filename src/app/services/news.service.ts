@@ -43,7 +43,8 @@ export class NewsService {
   async presentLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Requesting news...',
-      duration: 3000
+      duration: 3000,
+      animated: false
     });
 
     return await loading.present();
